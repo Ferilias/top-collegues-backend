@@ -1,6 +1,7 @@
 package dev.top.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,17 +62,23 @@ public class ColleguesController {
 		if (response.length == 0) {
 			throw new TopColleguesException("le matricule correspond à aucun matricule existant");
 		} else {
-			Collegues col = new Collegues();
-			col.setPseudo(cf.getPseudo());
-			if ((cf.getPhotoUrl() == null)) {
-				col.setPhotoUrl(response[0].getPhoto());
-			} else {
-				col.setPhotoUrl(cf.getPhotoUrl());
-			}
-			col.setScore(0);
-			return col;
-		}
 
+			Optional<Collegues> optCollegue = colleguesRepo.findByPseudo(cf.getPseudo());
+			
+			if(optCollegue.isPresent()) {
+				throw new TopColleguesException("Le pseudo existe déjà");
+			}else {
+				Collegues col = new Collegues();
+				col.setPseudo(cf.getPseudo());
+				if ((cf.getPhotoUrl() == null)) {
+					col.setPhotoUrl(response[0].getPhoto());
+				} else {
+					col.setPhotoUrl(cf.getPhotoUrl());
+				}
+				col.setScore(0);
+				return col;
+			}
+		}
 	}
 
 	// patch/collegues/PSEUDO
