@@ -57,12 +57,13 @@ public class ColleguesController {
 		String fooResourceUrl = "https://tommy-sjava.cleverapps.io/collegues?matricule=";
 		PapaColleguesJson[] response = restTemplate.getForObject(fooResourceUrl + cf.getMatricule(),
 				PapaColleguesJson[].class);
+
 		if (response.length == 0) {
 			throw new TopColleguesException("le matricule correspond à aucun matricule existant");
 		} else {
 			Collegues col = new Collegues();
 			col.setPseudo(cf.getPseudo());
-			if (cf.getPhotoUrl().equals(null)) {
+			if ((cf.getPhotoUrl() == null)) {
 				col.setPhotoUrl(response[0].getPhoto());
 			} else {
 				col.setPhotoUrl(cf.getPhotoUrl());
