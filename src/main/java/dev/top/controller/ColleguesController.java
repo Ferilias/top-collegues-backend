@@ -67,15 +67,22 @@ public class ColleguesController {
 			
 			if(optCollegue.isPresent()) {
 				throw new TopColleguesException("Le pseudo existe déjà");
-			}else {
+			}else if(cf.getMatricule().equals(cf.getPseudo())) {
+				throw new TopColleguesException("Le pseudo ne peut pas être identique au matricule");
+			}
+					else {
 				Collegues col = new Collegues();
 				col.setPseudo(cf.getPseudo());
-				if ((cf.getPhotoUrl() == null)) {
+				if (((cf.getPhotoUrl() == null) || cf.getPhotoUrl().equals(""))) {
 					col.setPhotoUrl(response[0].getPhoto());
 				} else {
 					col.setPhotoUrl(cf.getPhotoUrl());
 				}
 				col.setScore(0);
+				col.setAdresse(response[0].getAdresse());
+				col.setEmail(response[0].getEmail());
+				col.setNom(response[0].getNom());
+				col.setPrenom(response[0].getPrenom());
 				return col;
 			}
 		}
@@ -95,4 +102,10 @@ public class ColleguesController {
 		return colleguesRepo.save(verifExist(col));
 
 	}
+	@GetMapping("/{pseudo}")
+	@Transactional
+	public Optional<Collegues> detailCollegue(@PathVariable String pseudo) {
+		return colleguesRepo.findByPseudo(pseudo);
+	}
+
 }

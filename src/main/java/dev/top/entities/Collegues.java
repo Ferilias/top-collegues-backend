@@ -20,72 +20,102 @@ public class Collegues {
 	private Integer score;
 
 	private String photoUrl;
+	
+	private String nom;
+	
+	private String prenom;
+	
+	private String adresse;
+	
+	private String email;
 
 	public Collegues() {
 		
 	}
 
-	public Collegues(String pseudo, Integer score, String imgUrl) {
+	public Collegues(Integer id, String pseudo, Integer score, String photoUrl, String nom, String prenom,
+			String adresse, String email) {
 		super();
+		this.id = id;
 		this.pseudo = pseudo;
 		this.score = score;
-		this.photoUrl = imgUrl;
+		this.photoUrl = photoUrl;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.email = email;
 	}
 
-	/**
-	 * @return the id
-	 */
+	public Collegues(String string, int i, String string2) {
+		this.pseudo = string;
+		this.score = i;
+		this.photoUrl = string2;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the pseudo
-	 */
 	public String getPseudo() {
 		return pseudo;
 	}
 
-	/**
-	 * @param pseudo the pseudo to set
-	 */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 
-	/**
-	 * @return the score
-	 */
 	public Integer getScore() {
 		return score;
 	}
 
-	/**
-	 * @param score the score to set
-	 */
 	public void setScore(Integer score) {
 		this.score = score;
 	}
 
-	/**
-	 * @return the imgUrl
-	 */
 	public String getPhotoUrl() {
 		return photoUrl;
 	}
 
-	/**
-	 * @param imgUrl the imgUrl to set
-	 */
-	public void setPhotoUrl(String imgUrl) {
-		this.photoUrl = imgUrl;
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 
 }
